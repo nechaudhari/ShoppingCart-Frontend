@@ -5,17 +5,25 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
+
+interface Category {
+  id: number;
+  name: string;
+  description: string;
+}
 @Component({
   selector: 'app-post-product',
   templateUrl: './post-product.component.html',
   styleUrls: ['./post-product.component.scss']
 })
+
 export class PostProductComponent implements OnInit, OnDestroy {
   productForm: FormGroup;
-  listOfCategories: any[] = [];
+  listOfCategories: Category[] = [];
   selectedFile: File | null;
   imagePreview: string | ArrayBuffer | null;
   private subscription: Subscription;
+  
 
   constructor(
     private fb: FormBuilder,
@@ -55,20 +63,18 @@ export class PostProductComponent implements OnInit, OnDestroy {
   }
 
   getAllCategories() {
-    console.log("Getting categories...");
-    this.subscription = this.adminService.getAllCategories().subscribe(
-      res => {
-        console.log("Categories received:", res);
-        this.listOfCategories = res;
+    this.adminService.getAllCategories().subscribe(
+      categories => {
+        this.listOfCategories = categories;
       },
       error => {
-      //  console.error("Error getting categories:", error);
-        this.snackBar.open("An error occurred while fetching categories.", 'ERROR', {
-          duration: 5000
-        });
+        console.error('Error fetching categories:', error);
+        // Handle error
       }
     );
   }
+
+  
 
   addProduct(): void {
     if (this.productForm.valid) {

@@ -3,7 +3,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserStorageService } from 'src/app/services/storage/user-storage.service';
 
+
 const BASIC_URL = "http://localhost:8080"
+
+interface Category {
+    id: number;
+    name: string;
+    description: string;
+  }
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +25,8 @@ export class AdminService {
     })
   }
 
-  getAllCategories(): Observable<any>{
-    return this.http.get(`${BASIC_URL}/`, {
+  getAllCategories(): Observable<Category[]>{
+    return this.http.get<Category[]>(`${BASIC_URL}/`, {
       headers: this.createAuthorizationHeader(),
     })
   }
