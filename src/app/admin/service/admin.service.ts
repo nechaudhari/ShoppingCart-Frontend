@@ -43,6 +43,18 @@ export class AdminService {
     })
   }
 
+  getAllProductsByName(name:any): Observable<Category[]>{
+    return this.http.get<Category[]>(`${BASIC_URL}/admin/search/${name}`, {
+      headers: this.createAuthorizationHeader(),
+    })
+  }
+
+  deleteProduct(productId :any): Observable<any>{
+    return this.http.delete(`${BASIC_URL}/admin/product/${productId}`, {
+      headers: this.createAuthorizationHeader(),
+    })
+  }
+
   private createAuthorizationHeader(): HttpHeaders {
     return new HttpHeaders().set(
       'Authorization', 'Bearer ' + UserStorageService.getToken()
