@@ -69,7 +69,6 @@ export class PostProductComponent implements OnInit, OnDestroy {
       },
       error => {
         console.error('Error fetching categories:', error);
-        // Handle error
       }
     );
   }
@@ -99,7 +98,7 @@ export class PostProductComponent implements OnInit, OnDestroy {
           }
         },
         error => {
-          console.error("Error adding product:", error);
+          // console.error("Error adding product:", error);
           this.snackBar.open("An error occurred while adding the product.", 'ERROR', {
             duration: 5000
           });
