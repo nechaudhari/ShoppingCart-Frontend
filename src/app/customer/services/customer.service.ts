@@ -30,6 +30,24 @@ export class CustomerService {
     })
   }
 
+  addToCart(productId): Observable<Category[]>{
+    const cartDto = {
+      productId: productId,
+      userId: UserStorageService.getUserId()
+    }
+    return this.http.post<Category[]>(`${BASIC_URL}/customer/cart`, cartDto,  {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+
+  getCartByUserId(): Observable<any>{
+    const userId = UserStorageService.getUserId();
+    return this.http.get(`${BASIC_URL}/customer/cart/${userId}`, {
+      headers: this.createAuthorizationHeader(),
+    })
+  }
+
+
   private createAuthorizationHeader(): HttpHeaders {
     return new HttpHeaders().set(
       'Authorization', 'Bearer ' + UserStorageService.getToken()

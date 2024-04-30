@@ -21,7 +21,7 @@ export class DashboardComponent {
     this.getAllProducts();
     this.searchProductForm = this.fb.group({
       title: [null, [Validators.required]]
-    })
+    });
   }
 
   getAllProducts(){
@@ -45,8 +45,24 @@ export class DashboardComponent {
     })
   }
 
-  addToCart(id:any){
+  // addToCart(id:any){
+  //   this.customerService.addToCart(id).subscribe(res =>{
+  //     this.snackBar.open("Product added to Cart", "Close", {
+  //       duration: 5000
+  //     });
+  //   })
 
+  // }
+  addToCart(id: any) {
+    this.customerService.addToCart(id).subscribe(
+      (res:any) => {
+        this.snackBar.open("Product added to Cart", "Close", { duration: 5000 });
+      },
+      (error: any) => {
+        console.error('Error adding product to cart:', error);
+        this.snackBar.open("Error adding product to cart", "Close", { duration: 5000 });
+      }
+    );
   }
 
 

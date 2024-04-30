@@ -7,12 +7,14 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MaterialModule } from '../material-module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CartComponent } from './components/cart/cart.component';
 
 
 @NgModule({
   declarations: [
     CustomerComponent,
-    DashboardComponent
+    DashboardComponent,
+    CartComponent
   ],
   imports: [
     CommonModule,
